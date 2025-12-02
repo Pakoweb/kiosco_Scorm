@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 // Importamos el controlador para manejar la lógica de negocio
-const datosScormController = require('../controllers/datosScormController');
+const datosScormController = require('../controller/datosscorm.js');
 
 // 1. POST /datoscscorm: Registrar o actualizar los datos SCORM
 router.post('/', datosScormController.registrarOActualizar);

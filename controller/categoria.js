@@ -1,4 +1,4 @@
-const categoriaService = require('../services/categoriaService');
+const categoriaService = require('../models/categoria.js');
 
 // Función auxiliar para manejar errores uniformemente
 function handleServiceError(res, err, defaultMessage) {

@@ -1,5 +1,5 @@
 // Importar el Servicio, no el Pool de la DB
-const asignacionService = require('../services/asignacionService');
+const asignacionService = require('../models/asignacion.js');
 
 // Función auxiliar para manejar errores uniformemente
 function handleServiceError(res, err, defaultMessage) {

@@ -4,7 +4,7 @@ const mysql = require('mysql2/promise'); // Importamos mysql2/promise
 const pool = mysql.createPool({
   user: 'root',
   host: 'localhost',
-  database: 'SCORM_PI', // Usa el nombre de tu DB
+  database: 'plataforma_scorm', // Usa el nombre de tu DB
   password: '', // Contraseña vacía por defecto en XAMPP
   port: 3306,
   waitForConnections: true,

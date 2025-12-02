@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 // Importamos el controlador
-const obtencionController = require('../controllers/obtencionController');
+const obtencionController = require('../controller/obtencionpaq.js');
 
 // 1. POST /obtenciones: Registrar que un Centro ha obtenido un Paquete SCORM
 router.post('/', obtencionController.registrarObtencion);

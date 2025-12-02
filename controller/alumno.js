@@ -1,5 +1,5 @@
 // Importar el Servicio, no el Pool de la DB
-const alumnoService = require('../services/alumnoService');
+const alumnoService = require('../models/alumno.js');
 
 // Función auxiliar para manejar errores uniformemente
 function handleServiceError(res, err, defaultMessage) {

@@ -1,5 +1,5 @@
 // Importamos el Modelo
-const obtencionModel = require('../models/obtencionModel');
+const obtencionModel = require('../models/obtencionpaq.js');
 
 // 1. Registrar que un Centro ha obtenido un Paquete SCORM
 exports.registrarObtencion = async(req, res) => {

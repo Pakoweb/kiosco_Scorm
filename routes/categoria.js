@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 // Importamos solo el controlador para delegar la lógica de la petición HTTP
-const categoriaController = require('../controllers/categoriaController');
+const categoriaController = require('../controller/categoria.js');
 
 // 1. POST /categorias: Crear una nueva categoría
 router.post('/', categoriaController.createCategoria);

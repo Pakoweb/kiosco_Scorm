@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 // Importamos el controlador para delegar la lógica de la petición HTTP
-const alumnoController = require('../controllers/alumnoController');
+const alumnoController = require('../controller/alumno.js');
 
 // 1. POST /alumnos: Crear un nuevo alumno
 router.post('/', alumnoController.createAlumno);

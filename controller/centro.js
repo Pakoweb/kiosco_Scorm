@@ -1,5 +1,5 @@
 // Importamos el Modelo para acceder a la lógica de base de datos
-const centroModel = require('../models/centroModel');
+const centroModel = require('../models/centro.js');
 
 // 1. Crear un nuevo centro
 exports.crearCentro = async(req, res) => {

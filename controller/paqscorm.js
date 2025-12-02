@@ -1,5 +1,5 @@
 // Importamos el Modelo
-const paqScormModel = require('../models/paqScormModel');
+const paqScormModel = require('../models/paqscorm.js');
 
 // 1. Crear un nuevo paquete SCORM
 exports.crearPaquete = async(req, res) => {

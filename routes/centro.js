@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 // Importamos el controlador para manejar la lógica de negocio
-const centroController = require('../controllers/centroController');
+const centroController = require('../controller/centro.js');
 
 // 1. POST /centros: Crear un nuevo centro
 router.post('/', centroController.crearCentro);

@@ -3,7 +3,7 @@
 const express = require('express');
 const router = express.Router();
 // Solo importamos el controlador, no el Pool de la DB
-const adminController = require('../controllers/adminController');
+const adminController = require('../controller/admin.js');
 
 // 1. POST /admins
 router.post('/', adminController.createAdmin);

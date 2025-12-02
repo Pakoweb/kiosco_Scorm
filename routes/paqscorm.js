@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 // Importamos el controlador
-const paqScormController = require('../controllers/paqScormController');
+const paqScormController = require('../controller/paqscorm.js');
 
 // 1. POST /paqscorm: Crear un nuevo paquete SCORM
 router.post('/', paqScormController.crearPaquete);

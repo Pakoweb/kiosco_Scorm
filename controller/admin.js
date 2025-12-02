@@ -1,5 +1,5 @@
 // Importar el Servicio, no el Pool de la DB
-const adminService = require('../services/adminService');
+const adminService = require('../models/admin.js');
 
 // Función auxiliar para manejar errores uniformemente
 function handleServiceError(res, err, defaultMessage) {

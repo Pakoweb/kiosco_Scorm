@@ -1,5 +1,5 @@
 // Importamos el Modelo
-const datosScormModel = require('../models/datosScormModel');
+const datosScormModel = require('../models/datosscorm.js');
 
 // 1. Registrar o actualizar datos SCORM (UPSERT)
 exports.registrarOActualizar = async(req, res) => {

@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 // Importamos solo el controlador
-const asignacionController = require('../controllers/asignacionController');
+const asignacionController = require('../controller/asignacion.js');
 
 // 1. POST /asignaciones: Asignar un paquete SCORM a un alumno
 router.post('/', asignacionController.createAsignacion);
