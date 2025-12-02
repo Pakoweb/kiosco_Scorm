@@ -1,0 +1,159 @@
+/* Layout General de la página (El esqueleto) */
+.page-container {
+  display: flex; 
+  flex-direction: column; 
+  min-height: 100vh; 
+  background-color: #f4f4f4;
+}
+
+.main-layout { 
+  display: flex; 
+  flex: 1; /* Esto hace que ocupe todo el espacio disponible entre header y footer */
+}
+
+/* Estilos específicos del contenido central (Derecha) */
+.content-area { 
+  flex: 1; 
+  display: flex; 
+  flex-direction: column; 
+  background-color: #fff; 
+}
+
+/* --- Toolbar --- */
+.toolbar { 
+  background-color: var(--secondary-bg); 
+  padding: 1rem 3rem; 
+  display: flex; 
+  align-items: center; 
+  gap: 4rem; 
+  border-bottom: 2px solid black; 
+}
+
+.tool-group { 
+  display: flex; 
+  align-items: center; 
+  gap: 10px; 
+  font-size: 1.1rem; 
+  font-weight: bold;
+}
+
+.tiny-icon { height: 12px; width: auto; }
+
+.search-input { 
+  border-radius: 20px; 
+  border: none; 
+  padding: 8px 15px; 
+  width: 200px; 
+  outline: none;
+}
+
+.btn-mis-cursos { 
+  background-color: white; 
+  border: none; 
+  border-radius: 20px; 
+  padding: 8px 30px; 
+  font-weight: bold; 
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
+  cursor: pointer;
+}
+
+/* --- Info Panel (Zona central) --- */
+.info-panel { 
+  display: flex; 
+  border-bottom: 2px solid black; 
+  flex: 1; /* Para que crezca si sobra espacio */
+}
+
+.scorm-desc { 
+  flex: 0.8; /* Ocupa un poco menos de la mitad */
+  padding: 3rem; 
+  background-color: #dbe0e6; 
+  text-align: justify; 
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.scorm-desc h2 { margin-top: 0; color: var(--dark-panel); }
+
+.features-grid { 
+  flex: 1.2; 
+  background-color: var(--dark-panel); 
+  padding: 2rem; 
+  display: grid; 
+  grid-template-columns: repeat(3, 1fr); 
+  gap: 2rem; 
+  color: white; 
+}
+
+.feature-item { 
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; 
+  text-align: center; 
+}
+
+.feature-item span { 
+  margin-top: 10px; 
+  font-size: 0.7rem; 
+  font-weight: bold; 
+  letter-spacing: 1px;
+}
+
+.icon-circle { 
+  background-color: #e0e6ed; 
+  width: 60px; 
+  height: 60px; 
+  border-radius: 50%; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  border: 3px solid #333; 
+}
+
+.icon-circle img { 
+  width: 60%; 
+  height: 60%; 
+  object-fit: contain; 
+}
+
+/* --- Carousel Section (Abajo) --- */
+.most-visited-section { 
+  background-color: var(--secondary-bg); 
+  padding: 1.5rem 2rem; 
+  display: flex; 
+  flex-direction: column; 
+  justify-content: center; 
+}
+
+.section-badge { 
+  background-color: white; 
+  width: fit-content; 
+  padding: 5px 30px; 
+  border-radius: 20px; 
+  font-weight: bold; 
+  margin-bottom: 1rem; 
+  box-shadow: 0 2px 2px rgba(0,0,0,0.1); 
+}
+
+.courses-carousel { 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  gap: 3rem; 
+}
+
+.course-card img { 
+  height: 70px; 
+  width: auto; 
+  transition: transform 0.2s;
+}
+
+.course-card img:hover { transform: scale(1.1); }
+
+.arrow-separator { height: 30px; opacity: 0.8; }
+
+/* Responsivo */
+@media (max-width: 900px) {
+  .main-layout { flex-direction: column; }
+  .info-panel { flex-direction: column; }
+}

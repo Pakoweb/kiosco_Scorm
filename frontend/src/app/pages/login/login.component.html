@@ -1,0 +1,26 @@
+<div class="login-container">
+  <div class="login-card">
+    <div class="login-header">
+      <img src="assets/images/logo-elearning.png" alt="Logo" class="logo">
+      <h2>Bienvenido</h2>
+      <p>Introduce tu correo para acceder al Kiosco SCORM</p>
+    </div>
+
+    <div class="login-form">
+      <label for="email">Correo Institucional</label>
+      <input 
+        type="email" 
+        id="email" 
+        placeholder="usuario@campuscamara.es"
+        [(ngModel)]="email" 
+        (keyup.enter)="login()"
+      >
+      
+      <button (click)="login()">ENTRAR</button>
+    </div>
+    
+    <div class="login-footer">
+      <small>Acceso provisional para desarrollo</small>
+    </div>
+  </div>
+</div>
