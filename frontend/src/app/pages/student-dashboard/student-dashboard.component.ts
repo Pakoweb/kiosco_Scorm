@@ -13,10 +13,10 @@ export class StudentDashboardComponent implements OnInit {
   constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
-    this.http.get<any[]>('http://localhost:3000/paqscorms')
+    this.http.get<any[]>('http://localhost:3000/categorias')
       .subscribe({
         next: (data) => {
-           console.log('Datos recibidos de paqscorms:', data); //para ver qué llega del backend
+           console.log('Datos recibidos de categorias:', data); //para ver qué llega del backend
 
           this.users = data;
           this.chunkUsers();

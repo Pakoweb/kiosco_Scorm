@@ -18,8 +18,11 @@
           <span>BUSCAR</span>
         </div>
         <div class="tool-group">
-          <button class="btn-mis-cursos">MIS CURSOS</button>
-        </div>
+  <button class="btn-mis-cursos" routerLink="/alumnos">
+    LISTADO ALUMNOS
+  </button>
+</div>
+
       </div>
 
       
@@ -30,10 +33,23 @@
 
 
 <div class="courses-grid">
-  <div class="course-card" *ngFor="let user of users">
-    <img src="assets/images/placeholder.jpg" alt="User">
-    <p>{{ user.name }} - {{ user.email }}</p>
+  <!-- Lista simple de categorías que vienen de la BD -->
+<div *ngIf="users && users.length">
+
+  <h2>Categorías disponibles</h2>
+
+  <div class="category-list">
+    <div class="category-card" *ngFor="let cat of users">
+      <h3>{{ cat.nombre }}</h3>
+     
+      <small>ID: {{ cat.id_categoria }}</small>
+    </div>
   </div>
+
+</div>
+
+  
+
 </div>
 
 
@@ -68,6 +84,25 @@
 
     </main>
   </div>
+  <div class="courses-carousel">
+  <div class="course-card">
+    <img src="assets/images/cursoSQL.jpg" alt="Curso 1">
+  </div>
+
+  <img src="assets/images/flecha.png" class="arrow-separator" alt="Siguiente" />
+
+  <div class="course-card">
+    <img src="assets/images/cursophyton.jpg" alt="Curso 2">
+  </div>
+
+  <img src="assets/images/flecha.png" class="arrow-separator" alt="Siguiente" />
+
+  <div class="course-card">
+    <img src="assets/images/angular-.net-core.jpg" alt="Curso 3">
+  </div>
+</div>
+
+
 
   <app-footer></app-footer>
 

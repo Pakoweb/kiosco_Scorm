@@ -142,13 +142,7 @@
   gap: 3rem; 
 }
 
-.course-card img { 
-  height: 160px; 
-  width: auto; 
-  transition: transform 0.2s;
-}
 
-.course-card img:hover { transform: scale(1.1); }
 
 .arrow-separator { height: 30px; opacity: 0.8; }
 
@@ -165,16 +159,89 @@
 }
 
 .course-card {
-  background: #f5f5f5;
-  border-radius: 8px;
-  padding: 10px;
+  width: 220px;           /* o el ancho que quieras para cada tarjeta */
   text-align: center;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 
 .course-card img {
+  margin-top: 30px;
   width: 100%;
-  height: auto;
+  height: 140px;          /* MISMA ALTURA PARA TODAS */
+  object-fit: cover;      /* recorta un poco pero no deforma */
   border-radius: 4px;
   margin-bottom: 8px;
+  transition: transform 0.2s;
 }
+
+.course-card img:hover {
+  transform: scale(1.05);
+}
+
+/* 📱 Pantallas medianas (tablets, ventana a la mitad, etc.) */
+@media (max-width: 1024px) {
+  .main-layout {
+    flex-direction: column; /* Sidebar arriba, contenido debajo */
+  }
+
+  /* Si tu sidebar tiene una clase .sidebar, adapta esto */
+  .sidebar {
+    width: 100%;
+  }
+
+  .info-panel {
+    flex-direction: column; /* Descripción y features uno debajo del otro */
+  }
+
+  .scorm-desc {
+    padding: 2rem;
+  }
+
+  .features-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 columnas en lugar de 3 */
+    padding: 1.5rem;
+  }
+
+  .toolbar {
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 1rem 1.5rem;
+  }
+
+  .most-visited-section {
+    padding: 1rem 1.5rem;
+  }
+
+  .courses-carousel {
+    flex-direction: column; /* Las 3 cards una debajo de otra */
+    gap: 1.5rem;
+  }
+
+  .course-card {
+    width: 100%;
+    max-width: 260px;
+    margin: 0 auto; /* centradas */
+  }
+}
+
+/* 📱 Pantallas pequeñas (móvil) */
+@media (max-width: 600px) {
+  .features-grid {
+    grid-template-columns: 1fr; /* 1 columna en móvil */
+  }
+
+  .courses-grid {
+    grid-template-columns: 1fr; /* Las tarjetas grandes de cursos una debajo de otra */
+  }
+
+  .btn-mis-cursos {
+    width: 100%;
+    text-align: center;
+  }
+
+  .toolbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+

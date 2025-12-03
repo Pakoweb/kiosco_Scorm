@@ -1,0 +1,35 @@
+<h2>Listado de alumnos</h2>
+
+<!-- Mensajes de estado -->
+<div *ngIf="loading">Cargando alumnos...</div>
+<div *ngIf="error" class="error">{{ error }}</div>
+
+<!-- Si hay alumnos -->
+<table *ngIf="!loading && !error && alumnos.length">
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Email</th>
+      <th>Teléfono</th>
+      <th>Centro</th> <!-- título para nombre_centro -->
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let alumno of alumnos">
+      <td>{{ alumno.nombre }}</td>
+      <td>{{ alumno.email }}</td>
+      <td>{{ alumno.telefono }}</td>
+      <td>{{ alumno.nombre_centro }}</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Si el array está vacío -->
+<div *ngIf="!loading && !error && !alumnos.length">
+  No se han encontrado alumnos.
+</div>
+
+<!-- Botón para volver al dashboard -->
+<button routerLink="/student-dashboard">
+  Volver al panel de alumno
+</button>
