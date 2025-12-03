@@ -13,9 +13,11 @@ export class StudentDashboardComponent implements OnInit {
   constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
-    this.http.get<any[]>('https://jsonplaceholder.typicode.com/users')
+    this.http.get<any[]>('http://localhost:3000/paqscorms')
       .subscribe({
         next: (data) => {
+           console.log('Datos recibidos de paqscorms:', data); //para ver qué llega del backend
+
           this.users = data;
           this.chunkUsers();
         },

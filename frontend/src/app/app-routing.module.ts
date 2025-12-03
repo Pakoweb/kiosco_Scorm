@@ -4,11 +4,11 @@ import { LoginComponent } from './pages/login/login.component';
 import { StudentDashboardComponent } from './pages/student-dashboard/student-dashboard.component';
 
 const routes: Routes = [
-  // Ruta por defecto: LOGIN
-  { path: '', component: LoginComponent },
+  // Ruta por defecto: dashboard del estudiante
+  { path: '', component: StudentDashboardComponent },
   
-  // Ruta del Kiosco: /alumno
-  { path: 'alumno', component: StudentDashboardComponent },
+  // Ruta del formulario
+  { path: 'login', component: LoginComponent },
   
   // (Opcional) Redirigir cualquier ruta desconocida al login
   { path: '**', redirectTo: '' }
