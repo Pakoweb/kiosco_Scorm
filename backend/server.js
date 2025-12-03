@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors'); // <-- importar cors
 const app = express();
 const port = 3000;
 
@@ -15,6 +16,9 @@ const obtencionpaqRoutes = require('./routes/obtencionpaq');
 const datosscormRoutes = require('./routes/datosscorm');
 // Middleware para que Express pueda leer JSON en las peticiones
 app.use(express.json());
+app.use(cors({
+  origin: '*' // o 'http://localhost:4200' para Angular
+}));
 
 // Prueba la conexión (se puede mover esta lógica a un archivo aparte, pero aquí funciona)
 pool.getConnection()
