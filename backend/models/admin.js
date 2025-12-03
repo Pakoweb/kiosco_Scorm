@@ -6,7 +6,6 @@ const pool = require('../db/pool');
 // ----------------------------------------------------
 
 // Función auxiliar para verificar si el centro existe (opcional, pero útil)
-// La restricción FK ya lo hace, pero un check explícito puede dar mejor mensaje.
 async function checkCentroExists(id_centro) {
     const [rows] = await pool.execute('SELECT id_centro FROM CENTRO WHERE id_centro = ?', [id_centro]);
     if (rows.length === 0) {
@@ -18,17 +17,16 @@ async function checkCentroExists(id_centro) {
 
 // 1. Crear un nuevo administrador
 async function createAdmin(adminData) {
-    const { id_centro, nombre, email, telefono, password_hash } = adminData;
-
-    // Nota: Aquí se debería HASHEAR la contraseña si no viene hasheada.
-
-    const query = 'INSERT INTO ADMIN (id_centro, nombre, email, telefono, password_hash) VALUES (?, ?, ?, ?, ?)';
-    const values = [id_centro, nombre, email, telefono, password_hash];
+    const { id_centro, nombre, email, telefono } = adminData;
+    
+    // ELIMINADO: password_hash
+    const query = 'INSERT INTO ADMIN (id_centro, nombre, email, telefono) VALUES (?, ?, ?, ?)';
+    const values = [id_centro, nombre, email, telefono];
 
     try {
         const [result] = await pool.execute(query, values);
 
-        // Devolvemos el objeto sin la contraseña hasheada
+        // Devolvemos el objeto
         const newAdmin = {
             id_admin: result.insertId,
             id_centro,
@@ -103,21 +101,49 @@ async function getAdminById(id_admin) {
     return rows[0];
 }
 
-// 4. Actualizar un administrador por ID
+// 4. Obtener un administrador por Email
+async function getAdminByEmail(email) {
+    const query = `
+        SELECT 
+            a.id_admin, 
+            a.nombre, 
+            a.email, 
+            a.telefono, 
+            a.id_centro,
+            c.nombre AS nombre_centro
+        FROM 
+            ADMIN a
+        JOIN 
+            CENTRO c ON a.id_centro = c.id_centro
+        WHERE 
+            a.email = ?`;
+
+    const [rows] = await pool.execute(query, [email]);
+
+    if (rows.length === 0) {
+        // Si no se encuentra, lanzamos un error 404
+        const error = new Error(`Administrador con Email "${email}" no encontrado.`);
+        error.status = 404;
+        throw error;
+    }
+    return rows[0];
+}
+
+// 5. Actualizar un administrador por ID
 async function updateAdmin(id_admin, adminData) {
-    const { id_centro, nombre, email, telefono, password_hash } = adminData;
+    // ELIMINADO: password_hash
+    const { id_centro, nombre, email, telefono } = adminData;
 
-    // OJO: Si password_hash se actualiza, debe ser hasheado aquí.
-
-    // Verificamos si existe el centro de nuevo para claridad, aunque la FK lo controlará.
     await checkCentroExists(id_centro);
 
+    // ELIMINADO: password_hash = ?
     const query = `
         UPDATE ADMIN 
-        SET id_centro = ?, nombre = ?, email = ?, telefono = ?, password_hash = ?
+        SET id_centro = ?, nombre = ?, email = ?, telefono = ?
         WHERE id_admin = ?
     `;
-    const values = [id_centro, nombre, email, telefono, password_hash, id_admin];
+    // ELIMINADO: password_hash de values
+    const values = [id_centro, nombre, email, telefono, id_admin];
 
     try {
         const [result] = await pool.execute(query, values);
@@ -128,7 +154,7 @@ async function updateAdmin(id_admin, adminData) {
             throw error;
         }
 
-        // Devolvemos el registro actualizado (sin la contraseña)
+        // Devolvemos el registro actualizado
         const [updatedRows] = await pool.execute('SELECT id_admin, id_centro, nombre, email, telefono FROM ADMIN WHERE id_admin = ?', [id_admin]);
         return updatedRows[0];
 
@@ -138,11 +164,16 @@ async function updateAdmin(id_admin, adminData) {
             error.status = 409;
             throw error;
         }
+        if (err.code === 'ER_DUP_ENTRY') {
+             const error = new Error(`El email "${email}" ya está registrado como administrador.`);
+             error.status = 409;
+             throw error;
+        }
         throw err;
     }
 }
 
-// 5. Eliminar un administrador por ID
+// 6. Eliminar un administrador por ID
 async function deleteAdmin(id_admin) {
     const query = 'DELETE FROM ADMIN WHERE id_admin = ?';
     const [result] = await pool.execute(query, [id_admin]);
@@ -160,6 +191,7 @@ module.exports = {
     createAdmin,
     getAllAdmins,
     getAdminById,
+    getAdminByEmail,
     updateAdmin,
     deleteAdmin
 };

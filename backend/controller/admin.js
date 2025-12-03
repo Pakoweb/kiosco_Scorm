@@ -14,15 +14,18 @@ function handleServiceError(res, err, defaultMessage) {
 
 // 1. POST /admins: Crear administrador
 async function createAdmin(req, res) {
-    const { id_centro, nombre, email, password_hash } = req.body;
+    // ELIMINADO: password_hash
+    const { id_centro, nombre, email } = req.body; 
 
-    // Validación de campos obligatorios (Controlador)
-    if (!id_centro || !nombre || !email || !password_hash) {
-        return res.status(400).send({ message: 'Los campos id_centro, nombre, email y password_hash son obligatorios.' });
+    // ELIMINADO: password_hash de la validación
+    if (!id_centro || !nombre || !email) { 
+        // Mensaje ajustado para reflejar solo los campos requeridos
+        return res.status(400).send({ message: 'Los campos id_centro, nombre y email son obligatorios.' });
     }
 
     try {
-        const newAdmin = await adminService.createAdmin(req.body);
+        // req.body ahora solo contiene los campos que existen en la BD
+        const newAdmin = await adminService.createAdmin(req.body); 
         res.status(201).json(newAdmin); // 201 Created
     } catch (err) {
         handleServiceError(res, err, 'Error al crear el administrador.');
@@ -51,14 +54,33 @@ async function getAdminById(req, res) {
     }
 }
 
-// 4. PUT /admins/:id: Actualizar administrador
+// 4. GET /admins/email/:email: Obtener administrador por Email
+async function getAdminByEmail(req, res) {
+    const email = req.params.email;
+
+    // Validación básica de campo
+    if (!email) {
+        return res.status(400).send({ message: 'El campo email es obligatorio.' });
+    }
+
+    try {
+        const admin = await adminService.getAdminByEmail(email);
+        res.status(200).json(admin);
+    } catch (err) {
+        handleServiceError(res, err, 'Error al obtener el administrador por Email.');
+    }
+}
+
+// 5. PUT /admins/:id: Actualizar administrador
 async function updateAdmin(req, res) {
     const id_admin = req.params.id;
-    const { id_centro, nombre, email, password_hash } = req.body;
+    // ELIMINADO: password_hash
+    const { id_centro, nombre, email } = req.body;
 
     // Validación de campos obligatorios para la actualización
-    if (!id_centro || !nombre || !email || !password_hash) {
-        return res.status(400).send({ message: 'Todos los campos de administrador son obligatorios para la actualización (incluyendo password_hash).' });
+    // ELIMINADO: password_hash de la validación
+    if (!id_centro || !nombre || !email) {
+        return res.status(400).send({ message: 'Todos los campos de administrador son obligatorios para la actualización.' });
     }
 
     try {
@@ -69,7 +91,7 @@ async function updateAdmin(req, res) {
     }
 }
 
-// 5. DELETE /admins/:id: Eliminar administrador
+// 6. DELETE /admins/:id: Eliminar administrador
 async function deleteAdmin(req, res) {
     const id_admin = req.params.id;
 
@@ -86,6 +108,7 @@ module.exports = {
     createAdmin,
     getAllAdmins,
     getAdminById,
+    getAdminByEmail, // Exportada
     updateAdmin,
     deleteAdmin
 };
