@@ -22,7 +22,31 @@
         </div>
       </div>
 
+      
+
+      <div class="most-visited-section">
+
+        <div class="section-badge">Últimos Cursos</div>
+
+
+<div class="courses-grid">
+  <div class="course-card" *ngFor="let user of users">
+    <img src="assets/images/placeholder.jpg" alt="User">
+    <p>{{ user.name }} - {{ user.email }}</p>
+  </div>
+</div>
+
+
+        
+      
+      </div>
+
+
       <div class="info-panel">
+
+
+    
+
         <div class="scorm-desc">
           <h2>¿Qué es SCORM?</h2>
           <p>
@@ -39,17 +63,6 @@
         <div class="features-grid">
         <img src="assets/images/central.png" alt="imagen_central">
           
-        </div>
-      </div>
-
-      <div class="most-visited-section">
-        <div class="section-badge">MAS VISITADOS</div>
-        <div class="courses-carousel">
-          <div class="course-card"><img src="assets/images/cursoSQL.jpg" alt="SQL"></div>
-          <img src="assets/images/flecha.png" class="arrow-separator" alt=">">
-          <div class="course-card"><img src="assets/images/cursophyton.jpg" alt="Python"></div>
-          <img src="assets/images/flecha.png" class="arrow-separator" alt=">">
-          <div class="course-card"><img src="assets/images/angular-.net-core.jpg" alt="Angular"></div>
         </div>
       </div>
 
