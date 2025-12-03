@@ -10,7 +10,6 @@ const baseSelectQuery = `
         p.nombre, 
         p.descripcion, 
         p.version, 
-        p.archivo_path,
         c.nombre AS nombre_centro,
         cat.nombre AS nombre_categoria
     FROM 
@@ -23,14 +22,16 @@ const baseSelectQuery = `
 
 // 1. Crear un nuevo paquete SCORM
 exports.crear = async(paqueteData) => {
-    const { id_centro, id_categoria, nombre, descripcion, version, archivo_path } = paqueteData;
+    // Se elimina archivo_path
+    const { id_centro, id_categoria, nombre, descripcion, version } = paqueteData;
 
     const query = `
         INSERT INTO PAQ_SCORM 
-        (id_centro, id_categoria, nombre, descripcion, version, archivo_path) 
-        VALUES (?, ?, ?, ?, ?, ?)
+        (id_centro, id_categoria, nombre, descripcion, version) 
+        VALUES (?, ?, ?, ?, ?)
     `;
-    const values = [id_centro, id_categoria, nombre, descripcion, version, archivo_path];
+    // Se elimina archivo_path de los values
+    const values = [id_centro, id_categoria, nombre, descripcion, version];
 
     const [result] = await pool.execute(query, values);
 
@@ -41,8 +42,8 @@ exports.crear = async(paqueteData) => {
         id_categoria: parseInt(id_categoria),
         nombre,
         descripcion,
-        version,
-        archivo_path
+        version
+        // Se elimina archivo_path
     };
 };
 
@@ -65,14 +66,16 @@ exports.obtenerPorId = async(id_paq) => {
 
 // 4. Actualizar un paquete SCORM por ID
 exports.actualizar = async(id_paq, paqueteData) => {
-    const { id_centro, id_categoria, nombre, descripcion, version, archivo_path } = paqueteData;
+    // Se elimina archivo_path
+    const { id_centro, id_categoria, nombre, descripcion, version } = paqueteData;
 
     const query = `
         UPDATE PAQ_SCORM 
-        SET id_centro = ?, id_categoria = ?, nombre = ?, descripcion = ?, version = ?, archivo_path = ?
+        SET id_centro = ?, id_categoria = ?, nombre = ?, descripcion = ?, version = ?
         WHERE id_paq = ?
     `;
-    const values = [id_centro, id_categoria, nombre, descripcion, version, archivo_path, id_paq];
+    // Se elimina archivo_path de los values
+    const values = [id_centro, id_categoria, nombre, descripcion, version, id_paq];
 
     const [result] = await pool.execute(query, values);
 

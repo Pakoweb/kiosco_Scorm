@@ -3,10 +3,12 @@ const paqScormModel = require('../models/paqscorm.js');
 
 // 1. Crear un nuevo paquete SCORM
 exports.crearPaquete = async(req, res) => {
-    const { id_centro, id_categoria, nombre, descripcion, version, archivo_path } = req.body;
+    // Se elimina archivo_path
+    const { id_centro, id_categoria, nombre, descripcion, version } = req.body;
 
-    if (!id_centro || !id_categoria || !nombre || !archivo_path) {
-        return res.status(400).send({ message: 'Los campos id_centro, id_categoria, nombre y archivo_path son obligatorios.' });
+    // Se elimina la validación de archivo_path
+    if (!id_centro || !id_categoria || !nombre) {
+        return res.status(400).send({ message: 'Los campos id_centro, id_categoria y nombre son obligatorios.' });
     }
 
     try {
@@ -15,8 +17,8 @@ exports.crearPaquete = async(req, res) => {
             id_categoria,
             nombre,
             descripcion,
-            version,
-            archivo_path
+            version
+            // Se elimina archivo_path
         });
 
         res.status(201).json(nuevoPaquete);
@@ -67,8 +69,9 @@ exports.actualizarPaquete = async(req, res) => {
     const id_paq = req.params.id;
     const datos = req.body;
 
-    if (!datos.id_centro || !datos.id_categoria || !datos.nombre || !datos.archivo_path) {
-        return res.status(400).send({ message: 'Los campos id_centro, id_categoria, nombre y archivo_path son obligatorios para la actualización.' });
+    // Se elimina la validación de archivo_path
+    if (!datos.id_centro || !datos.id_categoria || !datos.nombre) {
+        return res.status(400).send({ message: 'Los campos id_centro, id_categoria y nombre son obligatorios para la actualización.' });
     }
 
     try {
