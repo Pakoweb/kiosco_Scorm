@@ -13,6 +13,7 @@ import { FormsModule } from '@angular/forms';
 import { StudentDashboardComponent } from './pages/student-dashboard/student-dashboard.component';
 import { ProfesorDashboardComponent } from './pages/profesor-dashboard/profesor-dashboard.component';
 import { StudentListComponent } from './pages/student-list/student-list.component';
+import { VisorScormComponent } from './pages/visor-scorm/visor-scorm.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { StudentListComponent } from './pages/student-list/student-list.componen
     LoginComponent,
           StudentDashboardComponent,
           ProfesorDashboardComponent,
-          StudentListComponent
+          StudentListComponent,
+          VisorScormComponent
   ],
   imports: [
     BrowserModule,

@@ -48,11 +48,21 @@ exports.crear = async(paqueteData) => {
 };
 
 // 2. Obtener todos los paquetes SCORM
-exports.obtenerTodos = async() => {
-    const query = `${baseSelectQuery} ORDER BY p.nombre ASC`;
-
-    const [rows] = await pool.execute(query);
-    return rows;
+exports.obtenerTodos = async () => {
+  const query = `
+    SELECT 
+      p.id_paq_scorm,
+      p.id_categoria,
+      p.nombre,
+      p.version,
+      p.descripcion,
+      c.nombre AS nombre_categoria
+    FROM PAQ_SCORM p
+    JOIN CATEGORIA c ON p.id_categoria = c.id_categoria
+    ORDER BY p.nombre ASC
+  `;
+  const [rows] = await pool.execute(query);
+  return rows;
 };
 
 // 3. Obtener un paquete SCORM por ID

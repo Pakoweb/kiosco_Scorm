@@ -13,10 +13,29 @@
           <img src="assets/images/icono_menu.png" class="tiny-icon" alt="v">
           <span>CATEGORIAS</span>
         </div>
-        <div class="tool-group search-group">
-          <input type="text" class="search-input" placeholder="Buscar...">
-          <span>BUSCAR</span>
-        </div>
+      <div class="tool-group search-group">
+
+  <select class="search-input"
+          [(ngModel)]="categoriaSeleccionada"
+          (change)="onCategoriaChange()">
+    <option value="">Todas las categorías</option>
+
+    <option *ngFor="let c of categorias" [value]="c.id_categoria">
+      {{ c.nombre }}
+    </option>
+  </select>
+
+<input
+  type="text"
+  class="search-input"
+  placeholder="Buscar paquete SCORM..."
+  [(ngModel)]="searchNombre"
+  (input)="onSearchNombreChange()"
+/>
+
+<span>BUSCAR</span>
+</div>
+
         <div class="tool-group">
   <button class="btn-mis-cursos" routerLink="/alumnos">
     LISTADO ALUMNOS
@@ -24,6 +43,29 @@
 </div>
 
       </div>
+
+<div class="courses-grid" style="margin-top: 16px;">
+
+  <h2>Paquetes SCORM</h2>
+
+  <div *ngIf="scormsFiltrados && scormsFiltrados.length; else noScorm">
+    <div class="category-list">
+
+    <div class="category-card"
+     *ngFor="let s of scormsFiltrados"
+     [routerLink]="['/visor-scorm', s.id_paq]"
+     style="cursor: pointer">
+  <h3>{{ s.nombre }}</h3>
+</div>
+    </div>
+  </div>
+
+  <ng-template #noScorm>
+    <p>No hay paquetes SCORM para esa categoría / búsqueda.</p>
+  </ng-template>
+
+</div>
+
 
       
 
@@ -34,12 +76,12 @@
 
 <div class="courses-grid">
   <!-- Lista simple de categorías que vienen de la BD -->
-<div *ngIf="users && users.length">
+<div *ngIf="categorias && categorias.length">
 
   <h2>Categorías disponibles</h2>
 
   <div class="category-list">
-    <div class="category-card" *ngFor="let cat of users">
+    <div class="category-card" *ngFor="let cat of categorias">
       <h3>{{ cat.nombre }}</h3>
      
       <small>ID: {{ cat.id_categoria }}</small>
