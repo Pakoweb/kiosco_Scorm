@@ -2,6 +2,8 @@ const express = require('express');
 const cors = require('cors'); // <-- importar cors
 const app = express();
 const port = 3000;
+const path = require('path');
+
 
 // Importar el pool de MySQL (configuración de la DB)
 const pool = require('./db/pool'); 
@@ -39,6 +41,8 @@ app.use('/paqscorms', paqscormRoutes);
 app.use('/asignaciones', asignacionRoutes);
 app.use('/obtencionpaqs', obtencionpaqRoutes);
 app.use('/datosscorms', datosscormRoutes);
+app.use("/scorm", express.static(path.join(__dirname, "scorm_content")));
+
 
 // Aquí se añadirán más rutas como:
 // app.use('/alumnos', alumnoRoutes);

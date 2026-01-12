@@ -39,11 +39,9 @@ export class StudentDashboardComponent implements OnInit {
 
   
 
-  onCategoriaChange(): void {
-    console.log('Categoría seleccionada:', this.categoriaSeleccionada);
-    // filtrar cursos/scorms por this.categoriaSeleccionada
-  }
-
+onCategoriaChange(): void {
+    this.aplicarFiltros();
+}
 
   //cargar paqscorm desde el backend
 
@@ -59,19 +57,9 @@ export class StudentDashboardComponent implements OnInit {
         error: (err) => console.error('Error cargando paquetes SCORM:', err)
       });
   }
-
-  onSearchNombreChange(): void {
-    const q = (this.searchNombre || '').trim().toLowerCase();
-
-    if (!q) {
-      this.scormsFiltrados = [...this.scorms];
-      return;
-    }
-
-    this.scormsFiltrados = this.scorms.filter(p =>
-      String(p.nombre ?? '').toLowerCase().includes(q)
-    );
-  }
+onSearchNombreChange(): void {
+    this.aplicarFiltros();
+}
 
   //buscador de paq scorm por categorias
   aplicarFiltros(): void {

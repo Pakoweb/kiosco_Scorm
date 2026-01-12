@@ -10,30 +10,26 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 })
 export class VisorScormComponent implements OnInit {
 
-scorm: any = null;
-safeUrl: SafeResourceUrl | null = null;
+  scorm: any = null;
+  safeUrl: SafeResourceUrl | null = null;
 
   constructor(
     private route: ActivatedRoute,
-    private http: HttpClient
+    private http: HttpClient,
+    private sanitizer: DomSanitizer // ✅ FALTABA
   ) {}
 
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
+
     this.http.get<any>(`http://localhost:3000/paqscorms/${id}`).subscribe({
       next: (data) => {
         this.scorm = data;
 
-        // ✅ AQUÍ defines la URL real del index.html del SCORM
-        // Como aún no existe launch_url en BD, ponemos un ejemplo:
-        // EJ: http://localhost:3000/scorms/<carpeta>/index.html
-        const url = this.scorm?.launch_url; // si luego lo añades en BD
-
-        if (url) {
-          this.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(url);
-        } else {
-          this.safeUrl = null;
-        }
+        const url = this.scorm?.launch_url;
+        this.safeUrl = url
+          ? this.sanitizer.bypassSecurityTrustResourceUrl(url)
+          : null;
       },
       error: (err) => console.error('Error cargando SCORM:', err)
     });
